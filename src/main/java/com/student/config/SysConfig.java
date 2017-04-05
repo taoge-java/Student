@@ -34,7 +34,6 @@ public class SysConfig extends JFinalConfig{
 	
 	public static String resourceUpload;//文件上传路径
 	
-	
 	@Override
 	public void configConstant(Constants constants) {
 		 constants.setDevMode(true);
