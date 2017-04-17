@@ -8,10 +8,9 @@
 <script type="text/javascript" src="$BASE_PATH/resource/js/layer/layer.js"></script>
 <link href="$BASE_PATH/resource/css/my/login.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-/*
- * button enter是件
- **
- */
+
+ // button enter是件
+
 	document.onkeydown = function (e) {
 	    var theEvent = window.event || e;
 	    var code = theEvent.keyCode || theEvent.which;
@@ -19,25 +18,23 @@
 	    	loginForm();
 	    }
 	}
-	/***
-	ajax表单校验
-	*/
+
 	function loginForm(){
 		
 		   		  if($("#username").val()==""){
-		   			  $('#Error').text("用户名不能为空");
+		   			  layer.tips('请输入用户名', '#username');
 		   			  return false;
 		   		  }
 		   		  if($('#password').val()==""){
-		   			  $('#Error').text("密码不能为空");
+		   			  layer.tips('请输入密码', '#password');
 		   			  return false;
 		   		  }
 		   		  if($('.code').val()==""){
-		   			  $('#Error').text("验证码不能为空");
+				    layer.tips('验证码不能为空', '.code');
 		   			 return false;
 		   		  }
 		   		  $.ajax({
-		   			 url:"/Student/login/login",
+		   			 url:"$BASE_PATH/login/login",
 		   			 type:"post",
 		   			 dataType:"json",
 		   			 data:{
@@ -51,11 +48,17 @@
 			   					  icon: 1,
 			   					  skin: 'layer-ext-moon' 
 			   					},function(){
-			   						location.href="/Student/login/success";
+			   						location.href="$BASE_PATH/login/success";
 			   					});
 			   					
 			   			     }else{
-			   				     $('#Error').text(data.message);
+			   				     layer.alert(data.message, {
+                                	 skin: 'layui-layer-green',
+                                	 closeBtn: 0,
+                                	  time: 1000,
+                                      icon:1,
+                        	          shift: 0 //动画类型
+                                  });
 			   				 }
 		   				 }
 		   		  });
@@ -87,9 +90,7 @@
 	    
 	          </div> 
 	          <div id="error">  
-	                <div style="float: left;position: relative;left:20px;top: 0px;color:red" id="Error"></div>
-	            
-	                <div id="forget_password" style="float: left;position: absolute;left: 700px;"><a href="#">忘记密码</a></div>
+	                <div id="forget_password" style="float: left;position: relative;;left: 190px;"><a href="#">忘记密码</a></div>
               </div>	          
                <div id="code" >
 	             <input type="button" value="登录" id="btn_sub" onclick="loginForm()" onkeydown="key()">

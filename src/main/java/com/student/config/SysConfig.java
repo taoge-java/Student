@@ -37,7 +37,7 @@ public class SysConfig extends JFinalConfig{
 	@Override
 	public void configConstant(Constants constants) {
 		 constants.setDevMode(true);
-		 constants.setViewType(ViewType.JSP);
+		 constants.setViewType(ViewType.VELOCITY);
 		 PropKit.use("config.properties");
 		 redisPassword = PropKit.get("db.redis.password").trim();
 		 redisHost = PropKit.get("db.redis.host").trim();

@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
     <title>学生信息后台管理系统</title>  
-    <link rel="stylesheet" href="<%=basePath %>resource/css/index/pintuer.css">
-    <link rel="stylesheet" href="<%=basePath %>resource/css/index/admin.css">
-    <script src="<%=basePath %>resource/js/jquery/jquery.js"></script>   
-    <script src="<%=basePath %>resource/js/index.js"></script>
+    <link rel="stylesheet" href="$BASE_PATH/resource/css/index/pintuer.css">
+    <link rel="stylesheet" href="$BASE_PATH/resource/css/index/admin.css">
+    <script src="$BASE_PATH/resource/js/jquery/jquery.js"></script>   
+    <script src="$BASE_PATH/resource/js/index.js"></script>
 </head>
 <body style="background-color:#f2f9fd;">
 <div class="header bg-main">

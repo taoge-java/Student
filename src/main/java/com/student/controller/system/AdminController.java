@@ -9,7 +9,7 @@ import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
 import com.student.common.BaseController;
-import com.student.constant.LogType;
+import com.student.constant.CommonEnum.LogType;
 import com.student.model.system.SystemAdmin;
 import com.student.model.system.SystemRole;
 import com.student.service.system.AdminServices;

@@ -11,6 +11,7 @@ import java.util.List;
 
 
 
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -23,22 +24,13 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import com.jfinal.plugin.activerecord.Page;
-import com.student.constant.Gender;
-import com.student.dao.StudentInfoDao;
+import com.student.constant.CommonEnum.Gender;
 import com.student.model.student.StudentInfo;
 
 
 @SuppressWarnings("unused")
 public class StudentInfoServices {
-	private StudentInfoDao studentDao=new StudentInfoDao();
-	/**
-	 * 学生列表
-	 * @return
-	 */
-	public List<StudentInfo> StudentList(){
-		
-		return studentDao.StudentList();
-	}
+	
 	/**
 	 * 根据id修改学生信息
 	 * @param id

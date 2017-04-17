@@ -3,11 +3,11 @@ $(function(){
 	 * 设置输入框边框颜色
 	 */
    $(".inputType").focus(function(){
-		$(this).css("border","1px solid red");
+		$(this).css("border","1px solid orange");
 		
 	});
    $(".code").focus(function(){
-		$(this).css("border","1px solid red");
+		$(this).css("border","1px solid orange");
 		
 	});
 });
