@@ -47,7 +47,6 @@ public class LoginControl extends BaseController{
 		String password=getPara("password");
 		String Code=getPara("code");
 		String number=(String) this.getSession().getAttribute("imagecheck");
-		LoginServices services=new LoginServicesImpl();
 		SystemAdmin admin=services.getAdmin(user,password);
 	    if(!Code.equals(number)){
 	    	ResultCode result=new ResultCode(ResultCode.FAIL, "验证码错误!");
