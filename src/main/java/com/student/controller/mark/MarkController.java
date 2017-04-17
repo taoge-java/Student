@@ -5,7 +5,7 @@ import java.util.List;
 import com.jfinal.ext.route.ControllerBind;
 import com.student.common.BaseController;
 import com.student.model.student.Mark;
-import com.student.model.student.Student;
+import com.student.model.student.StudentInfo;
 import com.student.model.system.SystemSubject;
 import com.student.service.student.MarkServices;
 import com.student.utils.Result;
@@ -23,7 +23,7 @@ public class MarkController extends BaseController{
 		List<Object> all=new ArrayList<Object>();
 		//List list=Student.dao.find("select * from student_info as si INNER JOIN student_mark as sm on si.number=sm.number INNER JOIN system_subject as subject on subject.subject_name=sm.subject_name");
 		//List score=Mark.dao.find("select id,group_concat(score) as score from student_mark group by  number");
-		List<Student> lists=Student.dao.find("select * from student_info");
+		List<StudentInfo> lists=StudentInfo.dao.find("select * from student_info");
 		//for(Student list:lists){
 		//	String number1=list.getStr("number");
 			//mark=Mark.dao.find("select * from  student_mark where number=?","C10D1405");

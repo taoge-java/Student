@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 
+
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -23,7 +25,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import com.jfinal.plugin.activerecord.Page;
 import com.student.constant.Gender;
 import com.student.dao.StudentInfoDao;
-import com.student.model.student.Student;
+import com.student.model.student.StudentInfo;
 
 
 @SuppressWarnings("unused")
@@ -33,7 +35,7 @@ public class StudentInfoServices {
 	 * 学生列表
 	 * @return
 	 */
-	public List<Student> StudentList(){
+	public List<StudentInfo> StudentList(){
 		
 		return studentDao.StudentList();
 	}
@@ -42,8 +44,8 @@ public class StudentInfoServices {
 	 * @param id
 	 * @return
 	 */
-	public Student findById(int id){
-		return Student.dao.findById(id);
+	public StudentInfo findById(int id){
+		return StudentInfo.dao.findById(id);
 	}
     /***
      * 单条删除学生信息
@@ -51,7 +53,7 @@ public class StudentInfoServices {
      * @return
      */
 	public boolean deteteById(Integer id){
-		return Student.dao.deleteById(id);
+		return StudentInfo.dao.deleteById(id);
 	}
 	/**
 	 * 批量删除学生信息
@@ -60,7 +62,7 @@ public class StudentInfoServices {
 	public boolean deleteByIds(String[] ids){
 	    
 		for(String id:ids){
-			Student.dao.deleteById(id);
+			StudentInfo.dao.deleteById(id);
 		}
 		return true;
 	}
@@ -68,7 +70,7 @@ public class StudentInfoServices {
 	 * 分页查询
 	 */
 
-	public Page<Student> Paginate(int pageNumber,int pageSize,String name,String sex,
+	public Page<StudentInfo> Paginate(int pageNumber,int pageSize,String name,String sex,
 			String	startTime,String  topTime){
 	    	List<Object> param=new ArrayList<Object>();
 	    	StringBuilder context=new StringBuilder("from student_info where 1=1");
@@ -87,7 +89,7 @@ public class StudentInfoServices {
 	    		param.add(startTime.replaceAll("/", "-"));
 	    		param.add(topTime.replaceAll("/", "-"));
 	    	}
-	    	return  Student.dao.paginate(pageNumber, pageSize, "select *",context.toString(),param.toArray());
+	    	return  StudentInfo.dao.paginate(pageNumber, pageSize, "select *",context.toString(),param.toArray());
     }
 	
 	
@@ -95,7 +97,7 @@ public class StudentInfoServices {
 	/**
 	 * 得到excel数据
 	 */
-	public List<Student> getExportData(String name,String sex,String startTime,String stopTime){
+	public List<StudentInfo> getExportData(String name,String sex,String startTime,String stopTime){
 		
 		List<Object> param=new ArrayList<Object>();
 		StringBuilder context=new StringBuilder("from student_info where 1=1");
@@ -114,12 +116,12 @@ public class StudentInfoServices {
     		param.add(startTime.replaceAll("/", "-"));
     		param.add(stopTime.replaceAll("/", "-"));
     	}
-    	return Student.dao.find("select *"+context.toString(),param.toArray());
+    	return StudentInfo.dao.find("select *"+context.toString(),param.toArray());
 	}
 	/**
 	 * 生成excel表格
 	 */
-	public HSSFWorkbook exportExcel(List<Student> list){
+	public HSSFWorkbook exportExcel(List<StudentInfo> list){
 		HSSFWorkbook work=new HSSFWorkbook();
 		HSSFSheet sheet=work.createSheet("sheet1");
 		HSSFRow row=sheet.createRow(0);
@@ -134,7 +136,7 @@ public class StudentInfoServices {
 		font.setFontHeight((short) 300);  
 		font.setColor(HSSFColor.BLUE.index);  
 
-		// 创建单元格样�?  
+		// 创建单元格样�?  
 		HSSFCellStyle style = work.createCellStyle();  
 		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);  
 
@@ -154,11 +156,11 @@ public class StudentInfoServices {
 		System.out.println(list.size());
 	    for(int i=1;i<=list.size();i++){
 	    	HSSFRow next=sheet.createRow(i);
-	    	//创建第一�?
+	    	//创建第一�?
 	    	HSSFCell cell0=next.createCell(0);
 	    	cell0.setCellStyle(style);
 	    	cell0.setCellValue(list.get(i-1).getInt("id"));
-	    	//创建第二�?
+	    	//创建第二�?
 	    	HSSFCell cell1=next.createCell(1);
 	    	cell1.setCellStyle(style);
 	    	cell1.setCellValue(list.get(i-1).getStr("number"));
@@ -174,14 +176,14 @@ public class StudentInfoServices {
 	    	HSSFCell cell4=next.createCell(4);
 	    	cell4.setCellStyle(style);
 	    	if(list.get(i-1).getInt("sex")==Gender.MAN.getValue()){
-	    	    cell4.setCellValue("�?");
+	    	    cell4.setCellValue("�?");
 	    	}else{
-	    		cell4.setCellValue("�?");
+	    		cell4.setCellValue("�?");
 	    	}
 	    	
 	    	HSSFCell cell5=next.createCell(5);
 	    	cell5.setCellStyle(style);
-	    	cell5.setCellValue(list.get(i-1).getStr("grade")+list.get(i-1).getInt("s_class")+"�?");
+	    	cell5.setCellValue(list.get(i-1).getStr("grade")+list.get(i-1).getInt("s_class")+"�?");
 	    	
 	    	HSSFCell cell6=next.createCell(6);
 	    	cell6.setCellStyle(style);

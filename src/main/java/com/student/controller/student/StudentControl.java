@@ -24,7 +24,7 @@ import com.jfinal.upload.UploadFile;
 import com.student.common.BaseController;
 import com.student.constant.CommConstant;
 import com.student.interceptor.GlobalActionInterceptor;
-import com.student.model.student.Student;
+import com.student.model.student.StudentInfo;
 import com.student.service.student.StudentInfoServices;
 import com.student.utils.MyFileExcelRender;
 import com.student.utils.ResultCode;
@@ -77,7 +77,7 @@ public class StudentControl extends BaseController{
 	 * 保存学生信息
 	 */
 	public void save(){
-	    Student student=getModel(Student.class,"student");
+	    StudentInfo student=getModel(StudentInfo.class,"student");
 	    student.save();
 	    this.Paginate();
 	}
@@ -87,7 +87,7 @@ public class StudentControl extends BaseController{
 	 * 保存修改信息
 	 */
 	public void update(){
-		Student stu=getModel(Student.class,"student");
+		StudentInfo stu=getModel(StudentInfo.class,"student");
 		stu.update();
 		this.Paginate();
 	}
@@ -132,7 +132,7 @@ public class StudentControl extends BaseController{
 		String startTime=getPara("start_time");
 		String stopTime=getPara("stop_time");
         Integer pageNumber=getParaToInt("pageNumber", 1);
-		Page<Student> page=services.Paginate(pageNumber, CommConstant.pageSize,name,sex,startTime,stopTime);
+		Page<StudentInfo> page=services.Paginate(pageNumber, CommConstant.pageSize,name,sex,startTime,stopTime);
         setAttr("name", name);
 		setAttr("sex", sex);
 		setAttr("startTime",startTime);
@@ -149,7 +149,7 @@ public class StudentControl extends BaseController{
 		String sex=getPara("sex");
 		String startTime=getPara("start_time");
 		String stopTime=getPara("stop_time");
-	    List<Student> list=services.getExportData(name,sex,startTime,stopTime);
+	    List<StudentInfo> list=services.getExportData(name,sex,startTime,stopTime);
 		String fileName="学生信息表.xls";
 		HttpServletResponse response = getResponse();
 		HSSFWorkbook work=services.exportExcel(list);
