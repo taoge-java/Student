@@ -9,9 +9,6 @@ import com.student.constant.User;
 import com.student.dao.UserSession;
 import com.student.interceptor.GlobalActionInterceptor;
 import com.student.model.system.SystemAdmin;
-import com.student.service.impl.LoginServicesImpl;
-import com.student.service.inter.LoginServices;
-import com.student.spring.SpringBeanManger;
 import com.student.utils.DateUtil;
 import com.student.utils.IpUtils;
 import com.student.utils.ResultCode;
@@ -22,9 +19,7 @@ public class LoginControl extends BaseController{
 	
 	@SuppressWarnings("unused")
 	private Logger log=Logger.getLogger(LoginControl.class);
-	
-	@SuppressWarnings("unused")
-	private LoginServicesImpl loginServices=Duang.duang(LoginServicesImpl.class.getName(), LoginServicesImpl.class);
+
 	
 	/**
 	 * 用户成功登录

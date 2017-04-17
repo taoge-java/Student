@@ -82,14 +82,4 @@ public class SysConfig extends JFinalConfig{
 	public void configHandler(Handlers handlers) {
 	   handlers.add(new ContextPathHandler("BASE_PATH"));
 	}
-	
-	@Override
-	public void afterJFinalStart() {
-		log.info("系统初始化完毕..........");
-	}
-	
-	@Override
-	public void beforeJFinalStop() {
-		log.info("系统即将关闭............");
-	}
 }
