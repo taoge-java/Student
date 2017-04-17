@@ -5,7 +5,7 @@ package com.student.model.system;
 import com.jfinal.ext.plugin.tablebind.TableBind;
 import com.student.model.BaseModel;
 
-@TableBind(tableName="sys_admin")
+@TableBind(tableName="system_admin")
 public class SystemAdmin extends BaseModel<SystemAdmin>{
 	
 	/**
