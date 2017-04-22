@@ -8,12 +8,11 @@ import com.student.utils.ImageUtil;
  * @author Administrator
  *
  */
-
 @ControllerBind(controllerKey="/")
 public class IndexController extends BaseController{
 
 	public void index(){
-		render("/WEB-INF/views/login/login.vm");
+		rendView("/login/login.vm");
 	}
 	
 	public void image(){

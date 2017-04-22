@@ -32,7 +32,9 @@ public class LoginController extends BaseController{
 			return;
 		}else{
 			loginSrvice(admin,password,code,number);
+			return;
 		}
+		//rendView("/index.vm");
 	}
 
 	/**
@@ -72,7 +74,6 @@ public class LoginController extends BaseController{
 		session.setNickName(admin.getStr("nickname"));
 		session.setMobile(admin.getStr("mobile"));
 		setSessionAttr(CommonConstant.SESSION_ID_KEY, session);
-		rendView("/index.vm");
 	}
 	/**
 	 * 用户注销

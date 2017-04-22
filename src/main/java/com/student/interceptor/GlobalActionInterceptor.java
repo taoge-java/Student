@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.student.constant.CommonConstant;
 /**
  * 用户session全局拦截器
  * @author Administrator
@@ -28,7 +29,7 @@ public class GlobalActionInterceptor implements Interceptor{
 	public void intercept(Invocation inv) {
 		HttpServletRequest request=inv.getController().getRequest();
 		HttpServletResponse response=inv.getController().getResponse();
-		Object object_session=request.getSession().getAttribute("user");
+		Object object_session=request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
 		if(isNeedLogin(inv.getControllerKey(),inv.getActionKey())&&object_session==null){
 			try {
 				response.sendRedirect(request.getContextPath()+"/");
@@ -44,7 +45,7 @@ public class GlobalActionInterceptor implements Interceptor{
 		if(controllerKey==null){
 			return true;
 		}
-		if(noNeedLoginUrl.contains(controllerKey+"/")||noNeedLoginUrl.contains(actionKey+"/")){
+		if(noNeedLoginUrl.contains(controllerKey)||noNeedLoginUrl.contains(actionKey)){
 			return false;
 		}
 		return true;

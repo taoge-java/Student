@@ -11,7 +11,7 @@
     height: 400px;background: white;margin-top: 20px;
     }
     #foot{
-    height: 90px;margin-bottom: 0px;background:#d0d0d0;margin: 0 auto;
+         background:#d0d0d0;margin: 0 auto;
     }
     #login{
      height: 320px;width: 350px;margin: 10px auto;border: 20px solid #CBE2EB; 
@@ -56,12 +56,5 @@
       .error{
         font-size:10px;padding-left: 2px;color: red;
       }
-      #forget_password a{
-      text-decoration: none;
-      }
-       #forget_password a:hover{
-      text-decoration: underline;color: red;
-      }
-      .title{
-      margin:  auto;
-      }
+ #forget_password a{text-decoration: none;}
+ #forget_password a:hover{text-decoration: underline;color: red; }

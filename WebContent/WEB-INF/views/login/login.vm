@@ -18,50 +18,54 @@
 	    	loginForm();
 	    }
 	}
+   
+	$(function(){
+	   var height=$(window).height()-$("#top").height()-$("#center").height()-50;
+	   $("#foot").height(height);
+	});
 
 	function loginForm(){
-		
-		   		  if($("#username").val()==""){
-		   			  layer.tips('请输入用户名', '#username');
-		   			  return false;
-		   		  }
-		   		  if($('#password').val()==""){
-		   			  layer.tips('请输入密码', '#password');
-		   			  return false;
-		   		  }
-		   		  if($('.code').val()==""){
-				    layer.tips('验证码不能为空', '.code');
-		   			 return false;
-		   		  }
-		   		  $.ajax({
-		   			 url:"$BASE_PATH/login",
-		   			 type:"post",
-		   			 dataType:"json",
-		   			 data:{
-		   				 "username":$("#username").val(),
-		   				 "password":$('#password').val(),
-		   				 "code":$('.code').val(),
-		   			 },
-		   			 success:function(data){
-			   				 if(data.code!=-1){
-			   					layer.alert(data.message, {
-			   					  icon: 1,
-			   					  skin: 'layer-ext-moon' 
-			   					},function(){
-			   						location.href="$BASE_PATH/login/success";
-			   					});
-			   					
-			   			     }else{
-			   				     layer.alert(data.message, {
-                                	 skin: 'layui-layer-green',
-                                	 closeBtn: 0,
-                                	  time: 1000,
-                                      icon:1,
-                        	          shift: 0 //动画类型
-                                  });
-			   				 }
-		   				 }
-		   		  });
+	  if($("#username").val()==""){
+		  layer.tips('请输入用户名', '#username');
+		  return false;
+	  }
+	  if($('#password').val()==""){
+		  layer.tips('请输入密码', '#password');
+		  return false;
+	  }
+	  if($('.code').val()==""){
+	    layer.tips('验证码不能为空', '.code');
+		 return false;
+	  }
+	  $.ajax({
+		 url:"$BASE_PATH/login",
+		 type:"post",
+		 dataType:"json",
+		 data:{
+			 "username":$("#username").val(),
+			 "password":$('#password').val(),
+			 "code":$('.code').val(),
+		 },
+		 success:function(data){
+   				 if(data.code!=-1){
+   					layer.alert(data.message, {
+   					  icon: 1,
+   					  skin: 'layer-ext-moon' 
+   					},function(){
+   						location.href="$BASE_PATH/login/success";
+   					});
+   					
+   			     }else{
+   				     layer.alert(data.message, {
+                    	 skin: 'layui-layer-green',
+                    	 closeBtn: 0,
+                    	  time: 1000,
+                          icon:1,
+            	          shift: 0 //动画类型
+                      });
+   				 }
+			 }
+	  });
 	}
 </script>
 </head>
