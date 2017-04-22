@@ -34,7 +34,7 @@
 		   			 return false;
 		   		  }
 		   		  $.ajax({
-		   			 url:"$BASE_PATH/login/login",
+		   			 url:"$BASE_PATH/login",
 		   			 type:"post",
 		   			 dataType:"json",
 		   			 data:{

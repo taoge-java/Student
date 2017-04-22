@@ -1,6 +1,5 @@
 package com.student.utils;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,6 +17,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+/**
+ * http请求工具类
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月22日 下午4:54:51
+ */
 public class HttpClientUtil {
 	
 	public static String httpRequest(String url,String charset){

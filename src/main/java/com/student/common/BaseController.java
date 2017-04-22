@@ -1,13 +1,10 @@
 package com.student.common;
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
 import com.student.config.SysConfig;
@@ -16,7 +13,12 @@ import com.student.model.system.SystemLog;
 import com.student.utils.DateUtil;
 import com.student.utils.IpUtils;
 import com.student.utils.NumberUtils;
-
+/**
+ * 控制器父类
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月22日 下午4:43:28
+ */
 public class BaseController extends Controller{
 	
 	
@@ -24,10 +26,19 @@ public class BaseController extends Controller{
 		render(SysConfig.BASE_VIEW+path);
 	}
 	
+    /**
+     * 获取在线用户信息
+     * @return
+     */
 	public  UserSession getCurrentUser(){
 		return  getSessionAttr("user");
 	}
 	
+	/**
+	 * 系统日志记录
+	 * @param oper_des
+	 * @param type
+	 */
 	@SuppressWarnings("static-access")
 	public void systemLog(String oper_des,int type){
 		UserSession user=getCurrentUser();
@@ -43,6 +54,8 @@ public class BaseController extends Controller{
 	
 	/**
 	 * 文件上传重命名
+	 * @param upload
+	 * @return
 	 */
 	public String UploadRename(UploadFile upload){
 		File file=upload.getFile();
@@ -78,7 +91,10 @@ public class BaseController extends Controller{
 		return null;
 	}
 
-	
+	/**
+	 * 生成新的图片文件
+	 * @return
+	 */
 	public String getImagePath(){
 		DateFormat format = new SimpleDateFormat("yyyy-MMdd");
 		return format.format(new Date()).replaceAll("-", "/");

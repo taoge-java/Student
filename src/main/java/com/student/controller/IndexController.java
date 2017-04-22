@@ -2,7 +2,7 @@ package com.student.controller;
 
 import com.jfinal.ext.route.ControllerBind;
 import com.student.common.BaseController;
-import com.student.utils.Image;
+import com.student.utils.ImageUtil;
 /***
  * 系统首页
  * @author Administrator
@@ -17,7 +17,7 @@ public class IndexController extends BaseController{
 	}
 	
 	public void image(){
-		Image image=new Image();
+		ImageUtil image=new ImageUtil();
 		render(image);
 	}
 

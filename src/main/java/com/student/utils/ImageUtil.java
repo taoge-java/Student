@@ -11,16 +11,22 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.render.Render;
+import com.student.constant.CommonConstant;
 /**
- * 验证码
- * @author Administrator
- *
+ * 生成验证码
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月22日 下午4:54:32
  */
 @SuppressWarnings("unused")
-public class Image extends Render{
+public class ImageUtil extends Render{
+	
     public static final int WIDTH=90;
+    
     public static final int HEIGHT=30;
+    
 	private Color color=new Color(255, 200, 188);
+	
 	@Override
 	public void render() {
 		BufferedImage image=new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -30,7 +36,7 @@ public class Image extends Render{
 		setBorder(graphics);
 		setRandomLine(graphics);
 		String num=serRandomNum(graphics);
-		request.getSession().setAttribute("imagecheck", num);
+		request.getSession().setAttribute(CommonConstant.IMAGE_CODE, num);
 		response.setHeader("Pragma","no-cache");
 		response.setHeader("Cache-Control","no-cache");
 		response.setDateHeader("Expires", 0);
@@ -42,6 +48,11 @@ public class Image extends Render{
 		}
 	}
 
+	/**
+	 * 生成随机数
+	 * @param graphics
+	 * @return
+	 */
 	private String serRandomNum(Graphics graphics) {
 		graphics.setFont(new Font("",Font.PLAIN, 22));
 		String number="ABCDEFGHIJKLMNRSTZXOPQWY";
@@ -57,6 +68,10 @@ public class Image extends Render{
 		return sb.toString();
 	}
 
+	/**
+	 * 设置线条
+	 * @param graphics
+	 */
 	private void setRandomLine(Graphics graphics) {
 		graphics.setColor(Color.BLUE);
 		for(int i=0;i<5;i++){
@@ -68,11 +83,19 @@ public class Image extends Render{
 		}
 	}
 
+	/**
+	 * 设置边框
+	 * @param graphics
+	 */
 	private void setBorder(Graphics graphics) {
 		graphics.setColor(color);
 		graphics.drawRect(1, 1, WIDTH-2, HEIGHT-2);
 	}
 
+	/**
+	 * 设置背景颜色
+	 * @param graphics
+	 */
 	private void setBackground(Graphics graphics) {
 		graphics.setColor(color);
 		graphics.fillRect(0,0, WIDTH, HEIGHT);

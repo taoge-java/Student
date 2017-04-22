@@ -8,7 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
-import com.student.constant.CommConstant;
+import com.student.constant.CommonConstant;
 import com.student.controller.system.AdminController;
 import com.student.model.system.SystemRole;
 import com.student.utils.Result;
@@ -33,7 +33,7 @@ public class RoleServices {
 		}
 		String order=" order by id desc";
 		context.append(order);
-		return SystemRole.dao.paginate(pageNumber,CommConstant.pageSize, "select *",context.toString(),param.toArray());
+		return SystemRole.dao.paginate(pageNumber,CommonConstant.pageSize, "select *",context.toString(),param.toArray());
 	}
 	
     /**

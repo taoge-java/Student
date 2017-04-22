@@ -22,7 +22,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
 import com.student.common.BaseController;
-import com.student.constant.CommConstant;
+import com.student.constant.CommonConstant;
 import com.student.interceptor.GlobalActionInterceptor;
 import com.student.model.student.StudentInfo;
 import com.student.service.student.StudentInfoServices;
@@ -132,7 +132,7 @@ public class StudentControl extends BaseController{
 		String startTime=getPara("start_time");
 		String stopTime=getPara("stop_time");
         Integer pageNumber=getParaToInt("pageNumber", 1);
-		Page<StudentInfo> page=services.Paginate(pageNumber, CommConstant.pageSize,name,sex,startTime,stopTime);
+		Page<StudentInfo> page=services.Paginate(pageNumber, CommonConstant.pageSize,name,sex,startTime,stopTime);
         setAttr("name", name);
 		setAttr("sex", sex);
 		setAttr("startTime",startTime);

@@ -7,7 +7,6 @@ public class NumberUtils {
 	/**
 	 * 生成随机短信验证码
 	 */
-	
 	public static String getMessageNum(int length){
 		StringBuffer sb = new StringBuffer();
         String str = "0123456789";

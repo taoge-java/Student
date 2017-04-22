@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
-import com.student.constant.CommConstant;
+import com.student.constant.CommonConstant;
 import com.student.model.system.SystemAdmin;
 import com.student.utils.Md5Utils;
 import com.student.utils.Result;
@@ -26,7 +26,7 @@ public class AdminServices {
 			context.append(" and login_name=?");
 			param.add(login_name);
 		}
-		return SystemAdmin.dao.paginate(pageNumber, CommConstant.pageSize, "select *", context.toString(),param.toArray());
+		return SystemAdmin.dao.paginate(pageNumber, CommonConstant.pageSize, "select *", context.toString(),param.toArray());
 	}
 	/**
 	 * 保存管理员

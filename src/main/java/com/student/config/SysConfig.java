@@ -26,7 +26,7 @@ public class SysConfig extends JFinalConfig{
 
 	private Logger log=Logger.getLogger(SysConfig.class);
 	
-	public final static String BASE_VIEW="/WEB-INF/views/";
+	public final static String BASE_VIEW="/WEB-INF/views";
 	
 	public static String redisHost; // redis主机
 	

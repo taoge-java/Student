@@ -12,7 +12,7 @@ create table system_admin(
    update_at datetime default null,
    admin_type tinyint(2) default 0,
    super_flag tinyint(1) default 1,
-   disabled_flag tinyint default 1,
+   disabled_flag tinyint(1) default 1,
    mail varchar(100) default null,
    last_login_time datetime default null,
    loing_error int default 0,
