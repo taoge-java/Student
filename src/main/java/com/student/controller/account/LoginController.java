@@ -1,4 +1,4 @@
-package com.student.controller.login;
+package com.student.controller.account;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
 import com.student.common.BaseController;
@@ -7,26 +7,46 @@ import com.student.constant.CommonEnum.LogType;
 import com.student.dao.UserSession;
 import com.student.model.system.SystemAdmin;
 import com.student.utils.DateUtil;
-import com.student.utils.EncryptUtils;
+import com.student.utils.ImageUtil;
 import com.student.utils.IpUtils;
+import com.student.utils.Md5Utils;
 import com.student.utils.ResultCode;
 
 
-@ControllerBind(controllerKey="/login")
+@ControllerBind(controllerKey="/account")
 public class LoginController extends BaseController{
 	
 	@SuppressWarnings("unused")
 	private Logger log=Logger.getLogger(LoginController.class);
 	
 	/**
-	 * 用户登录
+	 * 用户登录页面
 	 */
 	public void index(){
-		String user=getPara("username");
+		rendView("/account/login.vm");
+	}
+
+	/**
+	 * 验证码
+	 */
+	public void image(){
+		ImageUtil image=new ImageUtil();
+		render(image);
+	}
+
+	public void login(){
+		String userName=getPara("username");
 		String password=getPara("password");
 		String code=getPara("code");
 		String number=(String) this.getSession().getAttribute(CommonConstant.IMAGE_CODE);
-		SystemAdmin admin=SystemAdmin.dao.findFirst("select password,encrypt,disabled_flag from system_admin where name=?",user);
+		String remberPassword[]=getParaValues("checkbox");
+		if(remberPassword!=null&&remberPassword.length>0){
+			setCookie(CommonConstant.COOKIE_USERNAME,userName,60*60*24*30);
+			setCookie(CommonConstant.COOKIE_PASSWORD,Md5Utils.getMd5(password),60*60*24*30);
+		}else{
+			
+		}
+		SystemAdmin admin=SystemAdmin.dao.findFirst("select password,encrypt,disabled_flag from system_admin where name=?",userName);
 		if(admin==null){
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
@@ -34,9 +54,7 @@ public class LoginController extends BaseController{
 			loginSrvice(admin,password,code,number);
 			return;
 		}
-		//rendView("/index.vm");
 	}
-
 	/**
 	 * 
 	 * @param admin
@@ -46,7 +64,7 @@ public class LoginController extends BaseController{
 	 */
 	private void loginSrvice(SystemAdmin admin, String password, String code,
 			String number) {
-		if(admin.getStr("password").equals(EncryptUtils.encodePassword(password, admin.getStr("encrypt")))){
+		if(admin.getStr("password").equals(Md5Utils.getMd5(password, admin.getStr("encrypt")))){
 			if(admin.getBoolean("disabled_flag")){
 				renderJson(new ResultCode(ResultCode.FAIL, "用户已被禁用,请联系管理员"));
 				return;

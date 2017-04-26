@@ -2,22 +2,16 @@ package com.student.controller;
 
 import com.jfinal.ext.route.ControllerBind;
 import com.student.common.BaseController;
-import com.student.utils.ImageUtil;
-/***
+/**
  * 系统首页
- * @author Administrator
- *
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月26日 下午4:36:21
  */
 @ControllerBind(controllerKey="/")
 public class IndexController extends BaseController{
 
-	public void index(){
-		rendView("/login/login.vm");
+	public void success(){
+		rendView("/index.vm");
 	}
-	
-	public void image(){
-		ImageUtil image=new ImageUtil();
-		render(image);
-	}
-
 }

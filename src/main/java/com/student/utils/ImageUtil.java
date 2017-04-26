@@ -21,9 +21,9 @@ import com.student.constant.CommonConstant;
 @SuppressWarnings("unused")
 public class ImageUtil extends Render{
 	
-    public static final int WIDTH=90;
+    public static final int WIDTH=114;
     
-    public static final int HEIGHT=30;
+    public static final int HEIGHT=46;
     
 	private Color color=new Color(255, 200, 188);
 	
@@ -62,8 +62,8 @@ public class ImageUtil extends Render{
 			graphics.setColor(new Color(new Random().nextInt(80),new Random().nextInt(120),new Random().nextInt(200)));
 			String c=number.charAt(new Random().nextInt(number.length()))+"";
 			sb.append(c);
-			graphics.drawString(c, x, 20);
-			x+=20;
+			graphics.drawString(c, x, 28);
+			x+=28;
 		}
 		return sb.toString();
 	}

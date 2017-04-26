@@ -12,4 +12,9 @@ public class CommonConstant {
 	public static final int pageSize=10;
     /**图形验证码*/
 	public static final String IMAGE_CODE="image_code";
+	 /**用户cookie*/
+	public static final String COOKIE_USERNAME="username_cookie";
+		
+	public static final String COOKIE_PASSWORD="password_cookie";
+		
 }

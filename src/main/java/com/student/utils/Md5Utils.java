@@ -1,159 +1,86 @@
 package com.student.utils;
 
-import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-
-
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
-import javax.crypto.spec.DESedeKeySpec;
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.spec.PBEParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 
-
+/**
+ * md5密码加密
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月26日 下午5:19:15
+ */
 public class Md5Utils {
+	
 	/**
-	 * @author zjt
-	 * 密码加密
-	 * @return md5
-	 * @throws NoSuchAlgorithmException 
+	 * md5加密
+	 * @param Md5key 
+	 * @param salt 时间戳
+	 * @return
+	 * @throws NoSuchAlgorithmException
 	 */
-	public static String getMd5(String md5) throws NoSuchAlgorithmException{ 
-		MessageDigest md=MessageDigest.getInstance("md5");
-        byte[]  md5Byte=md.digest(md5.getBytes());
-        return Hex.encodeHexString(md5Byte);
+	public static String getMd5(String Md5key,String salt){
+		String key=DigestUtils.md5Hex(Md5key)+"&"+salt;
+		return DigestUtils.md5Hex(key);
 	}
 	
-	public static void main(String[] args) {
+	/**
+	 * md5密码加密
+	 * @param password
+	 * @return
+	 */
+	public static String getMd5(String password){
 		try {
-		   getDES("12345678");
-		} catch (Exception e) {
+			MessageDigest digest=MessageDigest.getInstance("md5");
+		    byte[] bytes=digest.digest(password.getBytes());
+		    return Hex.encodeHexString(bytes);
+		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	/**
-	 * DES加密算法
+	 * md5加密
+	 * @param inStr
+	 * @return
 	 */
-	public static void getDES(String des){
-		//生成key
-		try {
-			KeyGenerator keygenerator=KeyGenerator.getInstance("DES");
-			keygenerator.init(56);
-			SecretKey secretkey = keygenerator.generateKey();
-			byte[] bytes=secretkey.getEncoded();
-
-			//key转换
-		    DESKeySpec desedekeyspec=new DESKeySpec(bytes);
-			SecretKeyFactory factory=SecretKeyFactory.getInstance("DES");
-		    Key key=factory.generateSecret(desedekeyspec);
-				   
-		    //加密
-		    Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5padding");
-		    cipher.init(Cipher.ENCRYPT_MODE,key);
-		    byte[] result= cipher.doFinal(des.getBytes());
-		    System.out.println(Hex.encodeHexString(result));
-		    
-		    //解密
-		    cipher.init(Cipher.DECRYPT_MODE, key);
-		    result=cipher.doFinal(result);
-		    System.out.println("解密"+new String(result));
-		   // return  Hex.encodeHexString(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public static String stringMD5(String inStr){  
+        MessageDigest md5 = null;  
+        try{  
+            md5 = MessageDigest.getInstance("MD5");  
+        }catch (Exception e){  
+            System.out.println(e.toString());  
+            e.printStackTrace();  
+            return "";  
+        }  
+        char[] charArray = inStr.toCharArray();  
+        byte[] byteArray = new byte[charArray.length];  
+  
+        for (int i = 0; i < charArray.length; i++)  
+            byteArray[i] = (byte) charArray[i];  
+        byte[] md5Bytes = md5.digest(byteArray);  
+        StringBuffer hexValue = new StringBuffer();  
+        for (int i = 0; i < md5Bytes.length; i++){  
+            int val = ((int) md5Bytes[i]) & 0xff;  
+            if (val < 16)  
+                hexValue.append("0");  
+            hexValue.append(Integer.toHexString(val));  
+        }  
+        return hexValue.toString();  
+    }  
 	
-	/**
-	 * 3重des加密算法
-	 */
-	
-	public static void getJDK3des(String des){
-		//生成key
-				try {
-					KeyGenerator keygenerator=KeyGenerator.getInstance("DESede");
-					keygenerator.init(168);
-					SecretKey secretkey = keygenerator.generateKey();
-					byte[] bytes=secretkey.getEncoded();
-
-					//key转换
-				    DESedeKeySpec desedekeyspec=new DESedeKeySpec(bytes);
-					SecretKeyFactory factory=SecretKeyFactory.getInstance("DESede");
-				    Key key=factory.generateSecret(desedekeyspec);
-						   
-				    //加密
-				    Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5padding");
-				    cipher.init(Cipher.ENCRYPT_MODE,key);
-				    byte[] result= cipher.doFinal(des.getBytes());
-				    System.out.println(Hex.encodeHexString(result));
-				    
-				    //解密
-				    cipher.init(Cipher.DECRYPT_MODE, key);
-				    result=cipher.doFinal(result);
-				    System.out.println("解密"+new String(result));
-				   // return  Hex.encodeHexString(result);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-	}
-	
-	
-	/***
-	 * AES加密算法
-	 */
-	public static void getAES(String aes){
-		//生成key
-		try {
-			KeyGenerator keygenerator=KeyGenerator.getInstance("AES");
-			keygenerator.init(128);
-			SecretKey secretkey=keygenerator.generateKey();
-			byte[] bytes=secretkey.getEncoded();
-		
-		//key转换
-			Key key=new SecretKeySpec(bytes, "AES");
-		//加密
-			Cipher cipher=	Cipher.getInstance("AES/ECB/PKCS5padding");
-			cipher.init(Cipher.ENCRYPT_MODE, key);
-			byte[] result=cipher.doFinal(aes.getBytes());
-			 System.out.println(Hex.encodeHexString(result));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * PBE加密算法
-	 */
-	
-	public static void getPBE(String pbe){
-		SecureRandom securerandom =new SecureRandom();
-	    byte[] bytes=securerandom.generateSeed(8);
-	    
-	    //口令密钥
-	    String password="hello";
-	    PBEKeySpec pbekeyspec =new PBEKeySpec(password.toCharArray());
-	    try {
-			SecretKeyFactory factory=SecretKeyFactory.getInstance("PBEWITHMD5andDES");
-			Key key=factory.generateSecret(pbekeyspec);
-			
-			//加密
-			PBEParameterSpec  pbeparameterspec=new PBEParameterSpec(bytes,100);
-			Cipher cipher=	Cipher.getInstance("PBEWITHMD5andDES");
-			cipher.init(Cipher.ENCRYPT_MODE, key,pbeparameterspec);
-			byte[] result=cipher.doFinal(pbe.getBytes());
-			System.out.println(Hex.encodeHexString(result));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	 /** 
+     * 加密解密算法 执行一次加密，两次解密 
+     */   
+    public static String convertMD5(String inStr){  
+        char[] a = inStr.toCharArray();  
+        for (int i = 0; i < a.length; i++){  
+            a[i] = (char) (a[i] ^ 't');  
+        }  
+        String s = new String(a);  
+        return s;  
+    }  
 }
