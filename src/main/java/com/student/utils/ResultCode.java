@@ -4,9 +4,9 @@ public class ResultCode {
 	/**
 	 * 为方便处理ajax请求
 	 */
-	public static final int SUCCESS=0;
+	public static final int SUCCESS=1;
 	
-	public static final int FAIL=-1;
+	public static final int FAIL=0;
 	
 	public int code=SUCCESS;
 	
@@ -25,6 +25,4 @@ public class ResultCode {
 		this.message = message;
 		System.out.println("MESSAGE:"+message);
 	}
-	
-
 }

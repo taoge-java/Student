@@ -17,7 +17,8 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
-import com.student.interceptor.GlobalActionInterceptor;
+import com.student.interceptor.PermissionInterceptor;
+import com.student.interceptor.ViewContextInterceptor;
 import com.student.model.BaseModel;
 
 
@@ -75,7 +76,8 @@ public class SysConfig extends JFinalConfig{
 
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
-		interceptors.add(new GlobalActionInterceptor());
+		interceptors.add(new PermissionInterceptor());
+		interceptors.add(new ViewContextInterceptor());
 	}
 
 	@Override

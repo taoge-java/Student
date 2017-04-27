@@ -12,17 +12,18 @@ import com.jfinal.aop.Invocation;
 import com.student.constant.CommonConstant;
 /**
  * 用户session全局拦截器
- * @author Administrator
- *
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月27日 下午1:57:32
  */
-public class GlobalActionInterceptor implements Interceptor{
+public class PermissionInterceptor implements Interceptor{
 	
-	static Set<String> noNeedLoginUrl=new HashSet<>();
+	static Set<String> noNeedLoginUrl=new HashSet<String>();
 	/**
 	 * 不需要登录就能访问的url
 	 */
-	public GlobalActionInterceptor(){
-		noNeedLoginUrl.add("/");
+	public PermissionInterceptor(){
+		noNeedLoginUrl.add("/account");
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class GlobalActionInterceptor implements Interceptor{
 		Object object_session=request.getSession().getAttribute(CommonConstant.SESSION_ID_KEY);
 		if(isNeedLogin(inv.getControllerKey(),inv.getActionKey())&&object_session==null){
 			try {
-				response.sendRedirect(request.getContextPath()+"/");
+				response.sendRedirect(request.getContextPath()+"/account/");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

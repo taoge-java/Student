@@ -11,6 +11,10 @@ import com.student.common.BaseController;
 @ControllerBind(controllerKey="/")
 public class IndexController extends BaseController{
 
+	public void index(){
+		
+	}
+	
 	public void success(){
 		rendView("/index.vm");
 	}

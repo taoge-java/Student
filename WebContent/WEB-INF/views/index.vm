@@ -14,7 +14,7 @@
 <body style="background-color:#f2f9fd;">
 <div class="header bg-main">
   <div class="logo margin-big-left fadein-top">
-    <h4><img src="$BASE_PATH/resource/images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />欢迎您${user.loginName}</h4>
+    <h4><img src="$BASE_PATH/resource/images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />欢迎您$session.loginName</h4>
   </div>
   <div class="head-l">
   <a class="button button-little bg-red" href="$BASE_PATH/login/exit"><span class="icon-power-off"></span> 退出登录</a> &nbsp;&nbsp;<a href="##" class="button button-little bg-blue"><span class="icon-wrench"></span> 清除缓存</a> &nbsp;&nbsp; 

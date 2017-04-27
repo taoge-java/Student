@@ -23,7 +23,6 @@ import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
 import com.student.common.BaseController;
 import com.student.constant.CommonConstant;
-import com.student.interceptor.GlobalActionInterceptor;
 import com.student.model.student.StudentInfo;
 import com.student.service.student.StudentInfoServices;
 import com.student.utils.MyFileExcelRender;

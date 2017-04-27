@@ -159,7 +159,6 @@ public class EncryptUtil {
 	public static String getSHA(String key) throws NoSuchAlgorithmException{
 		MessageDigest sha=MessageDigest.getInstance("SHA");
 		byte[] by=sha.digest(key.getBytes());
-	    System.out.println(Hex.encodeHexString(by));
 	    return Hex.encodeHexString(by);
 	}
 	

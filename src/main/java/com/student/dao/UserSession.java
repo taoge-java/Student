@@ -22,17 +22,15 @@ public class UserSession {
 	
 	private String mobile;//手机号
 	
-	private int role_id;//用户角色id
-
-	public int getRole_id() {
-		return role_id;
+	public boolean isSuperFlag() {
+		return superFlag;
 	}
 
-	public void setRole_id(int role_id) {
-		this.role_id = role_id;
+	public void setSuperFlag(boolean superFlag) {
+		this.superFlag = superFlag;
 	}
-
-	private int superFlag;//是否超级管理员
+	
+	private boolean superFlag;//是否超级管理员
 
 	private static Set<String> menuIdSet;
 
@@ -60,13 +58,6 @@ public class UserSession {
 	}
 	private String login_time;//登录时间
 	
-	public int getSuperFlag() {
-		return superFlag;
-	}
-
-	public void setSuperFlag(int superFlag) {
-		this.superFlag = superFlag;
-	}
 
 	private String login_ip;//登录ip
 	

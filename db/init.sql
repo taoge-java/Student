@@ -2,7 +2,7 @@
 drop table if exists system_admin;
 create table system_admin(
    id int not null auto_increment,
-   user_name varchar(100) not null,
+   login_name varchar(100) not null,
    password varchar(100) not null,
    encrypt varchar(100) not null,
    last_login_ip varchar(100) default null,
@@ -11,10 +11,10 @@ create table system_admin(
    create_at datetime default null,
    update_at datetime default null,
    admin_type tinyint(2) default 0,
-   super_flag tinyint(1) default 1,
-   disabled_flag tinyint(1) default 1,
+   disabled_flag tinyint(1) default 0,
    mail varchar(100) default null,
    last_login_time datetime default null,
+   login_count int default 0,
    loing_error int default 0,
    primary key(id)
 )engine=innodb charset=utf8 collate=utf8_general_ci;
@@ -82,3 +82,7 @@ create table student_info(
   create_at datetime default null,
   primary key(id)
 )engine=innodb charset=utf8 collate=utf8_general_ci;
+
+
+
+insert into system_admin(login_name,password,encrypt) values("admin","9b05732f4b50b86a18e48b982c83bba3","d6f6ccb41d6403f2adeb98d6db97814a4b07594c");
