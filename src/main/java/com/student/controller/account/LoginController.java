@@ -1,9 +1,12 @@
 package com.student.controller.account;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.jfinal.aop.Duang;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
 import com.student.common.BaseController;
@@ -11,6 +14,7 @@ import com.student.constant.CommonConstant;
 import com.student.constant.CommonEnum.LogType;
 import com.student.dao.UserSession;
 import com.student.model.system.SystemAdmin;
+import com.student.service.system.RoleServices;
 import com.student.utils.DateUtil;
 import com.student.utils.ImageUtil;
 import com.student.utils.IpUtils;
@@ -28,6 +32,7 @@ public class LoginController extends BaseController{
 	
 	private static final Logger LOG=Logger.getLogger(LoginController.class);
 	
+	private RoleServices roleService=Duang.duang(RoleServices.class);
 	/**
 	 * 用户登录页面
 	 */
@@ -122,9 +127,14 @@ public class LoginController extends BaseController{
 		session.setUserId(admin.getInt("id"));
 		session.setLoginName(admin.getStr("login_name"));
 		session.setLogin_ip(admin.getStr("login_ip"));
+		session.setSuperFlag(admin.getBoolean("super_flag") ? true:false);
 		session.setNickName(admin.getStr("nickname"));
 		session.setMobile(admin.getStr("mobile"));
 		setSessionAttr(CommonConstant.SESSION_ID_KEY, session);
+		//非超级管理员加载权限
+		if(!session.isSuperFlag()){
+			loadPermissions(admin);
+		}
 	}
 	/**
 	 * 用户注销
@@ -151,5 +161,34 @@ public class LoginController extends BaseController{
 			error_count=systemAdmin.getInt("login_error");
 			renderJson(new ResultCode(ResultCode.SUCCESS, error_count+""));
 		}
+	}
+	/**
+	 * 加载权限
+	 */
+	@SuppressWarnings("unused")
+	private void loadPermissions(SystemAdmin admin){
+		Set<String> operCode=roleService.findRoleById(admin.getInt("role_id"));
+		Set<String> menuCode=addMenuCode(operCode);
+	}
+
+	/**
+	 * 获取菜单列表
+	 * @param operCode
+	 */
+	private Set<String> addMenuCode(Set<String> operCode) {
+		Set<String> menuCode=new LinkedHashSet<String>();
+		for(String code:operCode){
+			String[] codes=code.split("_");
+			String codeLevel="";//1_2_1_1
+			for(int i=0;i<codes.length-2;i++){
+				if("".equals(codeLevel)){
+					codeLevel+=codes[i]+"_"+codes[i+1];
+				}else{
+					codeLevel+="_"+codes[i+1];
+				}
+				menuCode.add(codeLevel);
+			}
+		}
+		return menuCode;
 	}
 }

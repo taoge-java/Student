@@ -1,5 +1,6 @@
 package com.student.dao;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -22,116 +23,114 @@ public class UserSession {
 	
 	private String mobile;//手机号
 	
+	private String mail;//邮箱号
+	
+	private boolean superFlag;
+	
 	public boolean isSuperFlag() {
 		return superFlag;
 	}
-
 	public void setSuperFlag(boolean superFlag) {
 		this.superFlag = superFlag;
 	}
+
+	private String last_login_ip;//用户ip
 	
-	private boolean superFlag;//是否超级管理员
-
-	private static Set<String> menuIdSet;
-
-	@SuppressWarnings("rawtypes")
-	public Set getMenuIdSet() {
-		return menuIdSet;
-	}
-
-	@SuppressWarnings("static-access")
-	public void setMenuIdSet(Set<String> menuIdSet) {
-		this.menuIdSet = menuIdSet;
-	}
-
-
+	private Set<String> menuCode;//菜单code
 	
-	public static boolean HasId(String id){
-	   
-		Iterator<String> it=menuIdSet.iterator();
-		while(it.hasNext()){
-			if(id.equals(it.next())){
-				return true;
-			}
-		}
-		return false;
-	}
-	private String login_time;//登录时间
+	private Set<String> operCode;//操作code
 	
-
-	private String login_ip;//登录ip
+	/**
+	 * 操作列表
+	 */
+	private Set<String> operCodeSet = new HashSet<String>();
+	/**
+	 * 菜单列表
+	 */
+	private Set<String> menuCodeSet = new HashSet<String>();
 	
-	private String exit_time;//退出时间
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-
 	public int getSessionId() {
 		return sessionId;
 	}
-
 	public void setSessionId(int sessionId) {
 		this.sessionId = sessionId;
 	}
-
 	public int getUserId() {
 		return userId;
 	}
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
 	public String getLoginName() {
 		return loginName;
 	}
-
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
-
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public String getRealName() {
 		return realName;
 	}
-
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
-
 	public String getMobile() {
 		return mobile;
 	}
-
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-
-	public String getLogin_time() {
-		return login_time;
+	public String getMail() {
+		return mail;
 	}
-
-	public void setLogin_time(String login_time) {
-		this.login_time = login_time;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
-
-	public String getLogin_ip() {
-		return login_ip;
+	public String getLast_login_ip() {
+		return last_login_ip;
 	}
-
-	public void setLogin_ip(String login_ip) {
-		this.login_ip = login_ip;
+	public void setLast_login_ip(String last_login_ip) {
+		this.last_login_ip = last_login_ip;
 	}
-
-	public String getExit_time() {
-		return exit_time;
+	public Set<String> getMenuCode() {
+		return menuCode;
 	}
-
-	public void setExit_time(String exit_time) {
-		this.exit_time = exit_time;
+	public void setMenuCode(Set<String> menuCode) {
+		this.menuCode = menuCode;
 	}
+	public Set<String> getOperCode() {
+		return operCode;
+	}
+	public void setOperCode(Set<String> operCode) {
+		this.operCode = operCode;
+	}
+	public Set<String> getOperCodeSet() {
+		return operCodeSet;
+	}
+	public void setOperCodeSet(Set<String> operCodeSet) {
+		this.operCodeSet = operCodeSet;
+	}
+	public Set<String> getMenuCodeSet() {
+		return menuCodeSet;
+	}
+	public void setMenuCodeSet(Set<String> menuCodeSet) {
+		this.menuCodeSet = menuCodeSet;
+	}
+	
+    public boolean HasMenu(){
+    	 if(isSuperFlag())
+    		 return true;
+    	 return menuCodeSet.contains(menuCode);
+    }
+
+    public boolean hasOper(){
+    	if(isSuperFlag())
+   		   return true;
+   	    return operCodeSet.contains(operCode);
+    }
 }

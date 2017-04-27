@@ -2,7 +2,9 @@ package com.student.service.system;
 
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -10,6 +12,7 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
 import com.student.constant.CommonConstant;
 import com.student.controller.system.AdminController;
+import com.student.model.system.SystemOper;
 import com.student.model.system.SystemRole;
 import com.student.utils.Result;
 import com.student.utils.ResultCode;
@@ -19,7 +22,32 @@ import com.student.utils.ResultCode;
  *
  */
 public class RoleServices {
+	
 	private Logger log=Logger.getLogger(AdminController.class);
+	
+	/**
+	 * 根据角色获取操作权限列表
+	 * @param roleId 角色id
+	 * @return
+	 */
+	public Set<String> findRoleById(int roleId){
+		SystemRole systemRole=SystemRole.dao.findById(roleId);
+		List<SystemOper> oper=null;
+		if(systemRole.getBoolean("super_flag")){
+			oper=SystemOper.dao.find("select * from system_oper");
+		}else{
+			//查询角色所以操作权限
+			oper=SystemOper.dao.find("select * from system_oper where id in(select oper_id from system_role_oper_ref where role_id="+roleId+")");
+		}
+		Set<String> operCode=new LinkedHashSet<String>();
+		for(SystemOper code:oper){
+			operCode.add(code.getStr("oper_code"));
+		}
+		return operCode;
+	}
+	
+	
+	
 	/**
 	 * 角色列表
 	 * @return

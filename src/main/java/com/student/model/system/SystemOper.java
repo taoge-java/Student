@@ -1,20 +1,21 @@
 package com.student.model.system;
+
 import com.jfinal.ext.plugin.tablebind.TableBind;
 import com.student.model.BaseModel;
+
 /**
- * 系统日志表
+ * 系统操作权限表
  * @author zengjintao
  * @version 1.0
- * @create_at 2017年4月27日 下午3:55:23
+ * @create_at 2017年4月27日 下午3:52:27
  */
-@TableBind(tableName="system_log")
-public class SystemLog extends BaseModel<SystemLog>{
-	
+@TableBind(tableName="system_oper")
+public class SystemOper extends BaseModel<SystemOper>{
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	public static final SystemLog dao=new SystemLog();
 
+	public static final  SystemOper dao=new SystemOper();
 }

@@ -10,8 +10,8 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * model基类
- * @author Administrator
- *
+ * @author zengjintao
+ * 2016年10月30日下午 18:32:28
  * @param <M>
  */
 
@@ -37,6 +37,4 @@ public class BaseModel<M extends Model<M>> extends Model<M>{
 		}
 		
 	}
-	
-
 }
