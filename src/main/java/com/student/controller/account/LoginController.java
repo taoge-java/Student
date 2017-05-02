@@ -126,7 +126,6 @@ public class LoginController extends BaseController{
 		UserSession session=new UserSession();
 		session.setUserId(admin.getInt("id"));
 		session.setLoginName(admin.getStr("login_name"));
-		session.setLogin_ip(admin.getStr("login_ip"));
 		session.setSuperFlag(admin.getBoolean("super_flag") ? true:false);
 		session.setNickName(admin.getStr("nickname"));
 		session.setMobile(admin.getStr("mobile"));
