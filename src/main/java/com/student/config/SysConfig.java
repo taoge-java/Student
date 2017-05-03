@@ -75,7 +75,7 @@ public class SysConfig extends JFinalConfig{
 
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
-		interceptors.add(new GlobalActionInterceptor());
+		//interceptors.add(new GlobalActionInterceptor());
 	}
 
 	@Override
