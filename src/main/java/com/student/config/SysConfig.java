@@ -35,6 +35,7 @@ public class SysConfig extends JFinalConfig{
 	
 	public static String resourceUpload;//文件上传路径
 	
+	public static String resourceDown;
 	@Override
 	public void configConstant(Constants constants) {
 		 constants.setDevMode(true);
@@ -43,6 +44,7 @@ public class SysConfig extends JFinalConfig{
 		 redisPassword = PropKit.get("db.redis.password").trim();
 		 redisHost = PropKit.get("db.redis.host").trim();
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
+		 resourceDown=PropKit.get("resource.upload.path").trim();
 		 constants.setUploadedFileSaveDirectory(resourceUpload);
 	}
 	/**

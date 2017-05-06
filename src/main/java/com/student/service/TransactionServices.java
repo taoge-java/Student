@@ -13,7 +13,7 @@ public class TransactionServices {
 	Boolean autoCommit=null;
 	
 	/**
-	 * �?启事�?
+	 * 开启事物
 	 */
 	@SuppressWarnings("unused")
 	private void startTransaction(){

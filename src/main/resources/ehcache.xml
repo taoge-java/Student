@@ -37,7 +37,13 @@
         timeToLiveSeconds="100"
         overflowToDisk="true"
      />
-    
+     <cache name="one.minute"
+        maxElementsInMemory="100"
+        eternal="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="true"
+    />
     <cache name="user.power"
         maxElementsInMemory="100"
         eternal="true"

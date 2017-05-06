@@ -126,7 +126,8 @@ public class LoginController extends BaseController{
 		admin.update();
 		UserSession session=new UserSession();
 		session.setUserId(admin.getInt("id"));
-		session.setLoin_time(DateUtil.getStrDate(admin.getDate("last_login_time")));
+		Date date=admin.getDate("last_login_time");
+		session.setLast_loin_time(DateUtil.getStrDate(date));
 		session.setLoginName(admin.getStr("login_name"));
 		session.setSuperFlag(admin.getBoolean("super_flag") ? true:false);
 		session.setNickName(admin.getStr("nickname"));
