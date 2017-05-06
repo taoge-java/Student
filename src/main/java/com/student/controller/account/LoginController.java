@@ -1,4 +1,5 @@
 package com.student.controller.account;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class LoginController extends BaseController{
 		String userName=getPara("username");
 		String password=getPara("password");
 		String code=getPara("code");
-		String number=(String) this.getSession().getAttribute(CommonConstant.IMAGE_CODE);
+		String number=(String) this.getSession().getAttribute(CommonConstant.IMAGE_CODE);//获取session中得验证码
 		String remberPassword[]=getParaValues("checkbox");//判断用户是否记住密码
 		if(remberPassword!=null&&remberPassword.length>0){//将用户名密码保存在cookie中
 			setCookie(CommonConstant.COOKIE_USERNAME,userName,60*60*24*30);
@@ -76,8 +77,8 @@ public class LoginController extends BaseController{
 		if(admin.getInt("login_error")<=3&&StringUtils.isBlank(code)){
 			   loginSrvice(admin,password);
 		}else{
-			if(code.equals(number)){
-		     	loginSrvice(admin,password);
+			if(code.equalsIgnoreCase(number)){
+		     	loginSrvice(admin,password);//验证码不区分大小写
 			}else{
 				admin.set("login_error", admin.getInt("login_error")+1);
 				admin.update();
@@ -119,12 +120,13 @@ public class LoginController extends BaseController{
 	 * 登录成功
 	 */
 	private void loginSuccess(SystemAdmin admin) {
-		admin.set("last_login_time",DateUtil.getDateTime());
+		admin.set("last_login_time",DateUtil.getDate());
 		admin.set("last_login_ip",IpUtils.getAddressIp(getRequest()));
 		admin.set("login_count",admin.getInt("login_count"+1));
 		admin.update();
 		UserSession session=new UserSession();
 		session.setUserId(admin.getInt("id"));
+		session.setLoin_time(DateUtil.getStrDate(admin.getDate("last_login_time")));
 		session.setLoginName(admin.getStr("login_name"));
 		session.setSuperFlag(admin.getBoolean("super_flag") ? true:false);
 		session.setNickName(admin.getStr("nickname"));

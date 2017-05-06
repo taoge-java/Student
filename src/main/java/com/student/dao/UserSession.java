@@ -1,13 +1,12 @@
 package com.student.dao;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
-
 /**
- * 用户session
- * @author Administrator
- *
+ * 保存用户登录信息
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年5月6日 下午4:16:11
  */
 public class UserSession {
 	
@@ -25,8 +24,16 @@ public class UserSession {
 	
 	private String mail;//邮箱号
 	
-	private boolean superFlag;
+	private boolean superFlag;//是否超级管理员
 	
+	private String last_loin_time;//登录时间
+	
+	public String getLoin_time() {
+		return last_loin_time;
+	}
+	public void setLoin_time(String last_loin_time) {
+		this.last_loin_time = last_loin_time;
+	}
 	public boolean isSuperFlag() {
 		return superFlag;
 	}
