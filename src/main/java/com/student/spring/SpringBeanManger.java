@@ -1,7 +1,12 @@
 package com.student.spring;
 
 import org.springframework.context.ApplicationContext;
-
+/**
+ * Spring手动管理bean
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年5月8日 上午8:37:45
+ */
 public class SpringBeanManger {
 	
 	private static ApplicationContext context;

@@ -1,9 +1,5 @@
 package com.student.utils;
-
-
-
 import javax.servlet.http.HttpServletRequest;
-
 
 public class IpUtils {
 	/**

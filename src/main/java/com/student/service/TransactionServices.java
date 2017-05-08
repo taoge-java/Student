@@ -5,7 +5,12 @@ import java.sql.SQLException;
 
 import com.jfinal.plugin.activerecord.Config;
 import com.jfinal.plugin.activerecord.DbKit;
-
+/**
+ * 手动数据库事物管理
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年5月8日 上午8:36:54
+ */
 public class TransactionServices {
 	
 	private Config config=null;
@@ -22,7 +27,7 @@ public class TransactionServices {
 		try{
 			if(conn!=null){
 				if(conn.getTransactionIsolation()<config.getTransactionLevel()){
-					conn.setTransactionIsolation(config.getTransactionLevel());
+					conn.setTransactionIsolation(config.getTransactionLevel());//设置事物隔离级别
 					return;
 				}
 			}
