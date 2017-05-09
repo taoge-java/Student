@@ -91,6 +91,8 @@ create table student_info(
   primary key(id)
 )engine=innodb charset=utf8 collate=utf8_general_ci;
 
+--科目信息表
+drop table if exists system_subject;
 
 
 
