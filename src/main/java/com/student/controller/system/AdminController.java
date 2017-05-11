@@ -8,8 +8,10 @@ import com.jfinal.aop.Duang;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
+import com.student.annotation.Permission;
 import com.student.common.BaseController;
 import com.student.constant.CommonEnum.LogType;
+import com.student.constant.OperCode;
 import com.student.model.system.SystemAdmin;
 import com.student.model.system.SystemRole;
 import com.student.service.system.AdminServices;
@@ -28,6 +30,7 @@ public class AdminController extends BaseController{
 	/**
 	 * 管理员列表
 	 */
+	@Permission(points=OperCode.OPER_CODE_1_3_1_1)
 	public void index(){
 		int pageNumber=getParaToInt("pageNumber",1);
 		String login_name=getPara("admin.name");

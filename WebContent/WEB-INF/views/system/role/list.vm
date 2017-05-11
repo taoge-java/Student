@@ -47,8 +47,9 @@
 		});
 	}
  
-	function getOper(){
-	
+	function getOper(index,id){
+	   var nodes=zTree.getCheckedNodes();
+	   alert(nodes);
 	}
 </script>
 </head>

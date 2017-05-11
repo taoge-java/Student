@@ -1,6 +1,7 @@
 package com.student.interceptor;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.student.annotation.Permission;
 import com.student.constant.CommonConstant;
+import com.student.dao.UserSession;
 /**
  * 用户session全局拦截器
  * @author zengjintao
@@ -38,7 +41,22 @@ public class PermissionInterceptor implements Interceptor{
 				e.printStackTrace();
 			}
 		}else{
-			inv.invoke();
+			UserSession session=(UserSession) object_session;
+			if(session.isSuperFlag())//是超级管理员
+			   inv.invoke();
+			else{
+				String[] oper={};
+				Method method=inv.getMethod();
+				Permission permission=method.getAnnotation(Permission.class);
+				if(permission!=null&&permission.points()!=null){
+					oper=permission.points();
+				}
+				if(oper!=null&&oper.length>0||session.hasAnyOper(oper)){
+					inv.invoke();
+				}else{
+					inv.getController().renderJavascript("alert('您的权限不足')");
+				}
+			}
 		}
 	}
 

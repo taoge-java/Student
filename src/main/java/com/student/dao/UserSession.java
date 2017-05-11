@@ -162,9 +162,18 @@ public class UserSession {
     	 return menuCodeSet.contains(menuCode);
     }
 
-    public boolean hasOper(){
+    public boolean hasOper(String code){
     	if(isSuperFlag())
    		   return true;
    	    return operCodeSet.contains(operCode);
+    }
+    
+    public boolean hasAnyOper(String[] operCode){
+    	for(String code:operCode){
+    		if(hasOper(code)){
+    			return true;
+    		}
+    	}
+    	return false;
     }
 }

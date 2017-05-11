@@ -8,7 +8,27 @@
 <script type="text/javascript" src="$BASE_PATH/resource/js/layer/layer.js"></script>
 <link href="$BASE_PATH/resource/css/my/login.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-
+function deleteMessage(id) {
+		layer.confirm('确定删除?', function(index){
+		  $.post("$BASE_PATH/message/destory/?ids="+id,
+			"", function(data) {
+			if (data.code != 0) {
+				 layer.alert(data.message, {
+					  icon: 2,
+					  skin: 'layer-ext-moon' 
+				 })
+			}else{
+				layer.alert(data.message ,{
+				  icon: 1,
+				  skin: 'layer-ext-moon' 
+				},function(index){
+				  location.reload();
+				})
+			}
+		  })
+		  layer.close(index);
+		});  
+	}
  // button enter是件
 
 	document.onkeydown = function (e) {

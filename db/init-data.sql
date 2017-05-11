@@ -14,7 +14,7 @@ insert into system_menu(id,menu_name,menu_code,menu_url,parent_id) values(9,'管
 insert into system_menu(id,menu_name,menu_code,menu_url,parent_id) values(10,'角色管理',"1_3_2","/student/info",8);
 insert into system_menu(id,menu_name,menu_code,menu_url,parent_id) values(11,'操作日志管理',"1_3_3","/student/info",8);
 
-insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(1,"列表",2,"1_1_1_1",null);
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(1,"新增",2,"1_1_1_1",null);
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(2,"删除",2,"1_1_1_2",null);
 
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(3,"列表",3,"1_1_2_1",null);
