@@ -5,9 +5,11 @@ import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
 import com.student.config.SysConfig;
+import com.student.constant.CommonConstant;
 import com.student.dao.UserSession;
 import com.student.model.system.SystemLog;
 import com.student.utils.DateUtil;
@@ -31,7 +33,7 @@ public class BaseController extends Controller{
      * @return
      */
 	public  UserSession getCurrentUser(){
-		return  getSessionAttr("user");
+		return  getSessionAttr(CommonConstant.SESSION_ID_KEY);
 	}
 	
 	/**

@@ -28,7 +28,7 @@ create table system_role(
    id int not null auto_increment,
    role_name varchar(100) not null,
    remark varchar(100) default null,
-   super_flag tinyint(1),
+   super_flag tinyint(1) default 0,
    primary key(id)
 )engine=innodb charset=utf8 collate=utf8_general_ci;
 
@@ -74,25 +74,5 @@ create table system_log(
    login_type tinyint(2) default 1,
    primary key(id)
 )engine=innodb charset=utf8 collate=utf8_general_ci;
-
--- 学生信息表
-drop table  if exists student_info;
-create table student_info(
-  id int not null auto_increment,
-  name varchar(100) not null,
-  age int not null,
-  sex tinyint not null,
-  tel varchar(100) default null,
-  address text default null,
-  grade int not null,
-  class int not null,
-  join_time datetime default null,
-  create_at datetime default null,
-  primary key(id)
-)engine=innodb charset=utf8 collate=utf8_general_ci;
-
---科目信息表
-drop table if exists system_subject;
-
 
 

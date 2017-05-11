@@ -2,9 +2,13 @@ package com.student.service.system;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -12,6 +16,7 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
 import com.student.constant.CommonConstant;
 import com.student.controller.system.AdminController;
+import com.student.model.system.SystemMenu;
 import com.student.model.system.SystemOper;
 import com.student.model.system.SystemRole;
 import com.student.utils.Result;
@@ -36,7 +41,7 @@ public class RoleServices {
 		if(systemRole.getBoolean("super_flag")){
 			oper=SystemOper.dao.find("select * from system_oper");
 		}else{
-			//查询角色所以操作权限
+			//查询角色所有操作权限
 			oper=SystemOper.dao.find("select * from system_oper where id in(select oper_id from system_role_oper_ref where role_id="+roleId+")");
 		}
 		Set<String> operCode=new LinkedHashSet<String>();
@@ -145,5 +150,47 @@ public class RoleServices {
 		}
 		result.setResultCode(resultCode);
 		return result;
+	}
+	
+	public String getOperByRoId(int role_id){
+		HashSet<String> hasOper=new HashSet<String>();
+		List<SystemOper> operList=SystemOper.dao.find("select * from system_oper a,system_role_oper_ref b where a.id=b.oper_id and b.role_id=?",role_id);
+		if(operList != null){
+			for(SystemOper oper: operList){
+				hasOper.add(oper.getStr("oper_code"));
+			}
+		}
+		//所有菜单
+		List<SystemMenu> menuList=SystemMenu.dao.find("select * from system_menu");
+		JSONArray jsonarray = new JSONArray();
+		if(menuList.size()>0&&menuList!=null){
+			JSONObject jsonObject=null;
+			for(SystemMenu menu:menuList){
+				jsonObject=new JSONObject();
+				jsonObject.put("id", menu.getInt("id"));
+				jsonObject.put("pId", menu.get("parent_id")==null?menu.getInt("id"):menu.getInt("parent_id"));
+				jsonObject.put("name", menu.getStr("menu_name"));
+				jsonObject.put("open", false);
+				jsonarray.add(jsonObject);
+			}
+		}
+		//所有操作
+		List<SystemOper> allOperList=SystemOper.dao.find("select * from system_oper");
+		if(allOperList.size()>0&&allOperList!=null){
+			JSONObject jsonObject=null;
+			for(SystemOper oper:allOperList){
+				jsonObject=new JSONObject();
+				jsonObject.put("id", oper.getInt("id")+"11");
+				jsonObject.put("name", oper.getStr("oper_name"));
+				jsonObject.put("pId", oper.getInt("menu_id"));
+				jsonObject.put("code",oper.getStr("oper_code"));
+				if(hasOper.contains(oper.getStr("oper_code"))){
+					jsonObject.put("checked", true);
+				}
+				jsonObject.put("open", false);
+				jsonarray.add(jsonObject);
+			}
+		}
+		return jsonarray.toString();
 	}
 }

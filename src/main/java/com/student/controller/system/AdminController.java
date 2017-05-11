@@ -28,14 +28,13 @@ public class AdminController extends BaseController{
 	/**
 	 * 管理员列表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void index(){
 		int pageNumber=getParaToInt("pageNumber",1);
 		String login_name=getPara("admin.name");
-		Page page=adminServices.getAdmin(login_name,pageNumber);
+		Page<SystemAdmin> page=adminServices.getAdmin(login_name,pageNumber);
 		setAttr("login_name", login_name);
-		setAttr("admins", page);
-		rendView("system/admin/list.jsp");
+		setAttr("page", page);
+		rendView("/system/admin/list.vm");
 	}
 	
     /**

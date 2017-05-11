@@ -28,3 +28,12 @@ insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(8,"删除"
 
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(9,"列表",7,"1_2_3_1",null);
 insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(10,"删除",7,"1_2_3_2",null);
+
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(11,"列表",9,"1_3_1_1",null);
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(12,"删除",9,"1_3_1_2",null);
+
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(13,"列表",10,"1_3_2_1",null);
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(14,"删除",10,"1_3_2_2",null);
+
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(15,"列表",11,"1_3_3_1",null);
+insert into system_oper(id,oper_name,menu_id,oper_code,remark) values(16,"删除",11,"1_3_3_2",null);

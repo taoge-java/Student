@@ -34,14 +34,15 @@ public class UserSession {
 	
 	private Set<String> operCode;//操作code
 	
-	public String getLast_loin_time() {
+	
+	public String getLast_login_time() {
 		return last_login_time;
 	}
-	
-	public void setLast_loin_time(String last_login_time) {
+
+	public void setLast_login_time(String last_login_time) {
 		this.last_login_time = last_login_time;
 	}
-	
+
 	public boolean isSuperFlag() {
 		return superFlag;
 	}

@@ -25,21 +25,26 @@ public class RoleController extends BaseController{
 	
 	private RoleServices roleServices=Duang.duang(RoleServices.class.getName(), RoleServices.class);
 	
-	
 	public void index(){
 		Integer pageNumber=getParaToInt("pageNumber", 1);
 		String role_name=getPara("role.name");
 		Page<SystemRole> page=roleServices.getRole(pageNumber,role_name);
-		setAttr("roles", page);
+		setAttr("pages", page);
 		setAttr("login_name",role_name);
-		rendView("system/role/list.jsp");
+		rendView("/system/role/list.vm");
+	}
+	public void operRole(){
+		int roleId=getParaToInt("id");
+		String operList=roleServices.getOperByRoId(roleId);
+		setAttr("operList", operList);
+		rendView("/system/role/oper.vm");
 	}
 	
 	 /**
      * 添加角色
      */
 	public void add(){
-		rendView("system/role/add.jsp");
+		rendView("/system/role/add.vm");
 	}
 	/***
 	 * 创建角色

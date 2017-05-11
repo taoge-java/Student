@@ -127,7 +127,7 @@ public class LoginController extends BaseController{
 		UserSession session=new UserSession();
 		session.setUserId(admin.getInt("id"));
 		Date date=admin.getDate("last_login_time");
-		session.setLast_loin_time(DateUtil.getStrDate(date));
+		session.setLast_login_time(DateUtil.getStrDate(date));
 		session.setLoginName(admin.getStr("login_name"));
 		session.setSuperFlag(admin.getBoolean("super_flag") ? true:false);
 		session.setNickName(admin.getStr("nickname"));
@@ -167,10 +167,11 @@ public class LoginController extends BaseController{
 	/**
 	 * 加载权限
 	 */
-	@SuppressWarnings("unused")
 	private void loadPermissions(SystemAdmin admin){
-		Set<String> operCode=roleService.findRoleById(admin.getInt("role_id"));
-		Set<String> menuCode=addMenuCode(operCode);
+		Set<String> operCode=roleService.findRoleById(admin.getInt("role_id"));//操作列表
+		Set<String> menuCode=addMenuCode(operCode);//菜单列表
+		getCurrentUser().setOperCodeSet(operCode);
+		getCurrentUser().setMenuCodeSet(menuCode);
 	}
 
 	/**
@@ -181,7 +182,7 @@ public class LoginController extends BaseController{
 		Set<String> menuCode=new LinkedHashSet<String>();
 		for(String code:operCode){
 			String[] codes=code.split("_");
-			String codeLevel="";//1_2_1_1
+			String codeLevel="";
 			for(int i=0;i<codes.length-2;i++){
 				if("".equals(codeLevel)){
 					codeLevel+=codes[i]+"_"+codes[i+1];

@@ -18,9 +18,8 @@ public class AdminServices {
 	/**
 	 * 管理员列表
 	 */
-	@SuppressWarnings("rawtypes")
-	public Page getAdmin(String  login_name,int pageNumber){
-		StringBuilder context=new StringBuilder("from sys_admin where 1=1");
+	public Page<SystemAdmin> getAdmin(String  login_name,int pageNumber){
+		StringBuilder context=new StringBuilder("from system_admin where 1=1");
 		List<Object> param=new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(login_name)){
 			context.append(" and login_name=?");

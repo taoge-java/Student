@@ -1,6 +1,32 @@
 package com.test;
 
+import java.util.HashSet;
+import java.util.Iterator;
+
 public class StudentInfo {
+	public static void main(String[] args) {
+//		LinkedHashSet<String> set=new LinkedHashSet<String>();
+//		set.add("a");
+//		set.add("a");
+//		set.add("b");
+//		 Iterator<String> it=set.iterator();
+//		 while(it.hasNext()){
+//			 System.out.println(it.next());
+//		 }
+		 
+		    HashSet<String> set1=new HashSet<String>();
+		    set1.add("a");
+			set1.add("b");
+			set1.add("c");
+			set1.add("d");
+			set1.add("e");
+			set1.add("f");
+			 Iterator<String> it1=set1.iterator();
+			 while(it1.hasNext()){
+				 System.out.println(it1.next());
+			 }
+	}
+
 //	private StudentInfoServices services=Duang.duang(StudentInfoServices.class.getName(), StudentInfoServices.class);
 //	
 //	private Logger log=Logger.getLogger(StudentControl.class);
