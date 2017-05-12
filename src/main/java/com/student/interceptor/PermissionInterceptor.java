@@ -42,7 +42,7 @@ public class PermissionInterceptor implements Interceptor{
 			}
 		}else{
 			UserSession session=(UserSession) object_session;
-			if(session.isSuperFlag())//是超级管理员
+			if(session!=null&&session.isSuperFlag())//是超级管理员
 			   inv.invoke();
 			else{
 				String[] oper={};
@@ -51,7 +51,7 @@ public class PermissionInterceptor implements Interceptor{
 				if(permission!=null&&permission.points()!=null){
 					oper=permission.points();
 				}
-				if(oper!=null&&oper.length>0||session.hasAnyOper(oper)){
+				if(oper!=null&&(oper.length==0||session.hasAnyOper(oper))){
 					inv.invoke();
 				}else{
 					inv.getController().renderJavascript("alert('您的权限不足')");
