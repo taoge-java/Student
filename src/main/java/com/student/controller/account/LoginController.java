@@ -11,6 +11,8 @@ import com.jfinal.aop.Duang;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.jfinal.plugin.redis.Cache;
+import com.jfinal.plugin.redis.Redis;
 import com.student.common.BaseController;
 import com.student.common.Constant;
 import com.student.constant.CommonConstant;
@@ -71,11 +73,13 @@ public class LoginController extends BaseController{
 			removeCookie(CommonConstant.COOKIE_USERNAME, "/");
 			removeCookie(CommonConstant.COOKIE_PASSWORD, "/");
 		}
-		SystemAdmin admin1=CacheKit.get(Constant.ONE_MINUTE, "user");
-		SystemAdmin admin=SystemAdmin.dao.findFirstByCache(Constant.ONE_MINUTE,"user"," select * from system_admin where login_name=?",userName);
+		//ehcache 缓存
+//		SystemAdmin admin1=CacheKit.get(Constant.ONE_MINUTE, "user");
+//		SystemAdmin admin=SystemAdmin.dao.findFirstByCache(Constant.ONE_MINUTE,"user"," select * from system_admin where login_name=?",userName);
 		
 		//System.err.println(admin1);
-//		/SystemAdmin admin=SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
+		SystemAdmin admin=SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
+		//Cache cahe=Redis.use("student");
 		if(admin==null){
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
