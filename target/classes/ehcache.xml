@@ -40,8 +40,8 @@
      <cache name="one.minute"
         maxElementsInMemory="100"
         eternal="true"
-        timeToIdleSeconds="0"
-        timeToLiveSeconds="0"
+        timeToIdleSeconds="100"
+        timeToLiveSeconds="48600"
         overflowToDisk="true"
     />
     <cache name="user.power"

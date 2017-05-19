@@ -1,13 +1,13 @@
 package com.test.redis;
 
-import com.jfinal.log.Log;
-import com.redis.test.TestPubSub;
+
+import com.jfinal.log.Logger;
 
 import redis.clients.jedis.JedisPubSub;
 
 public class RedisListener extends JedisPubSub{
 
-	private static final Log logger=Log.getLog(TestPubSub.class);
+	private static final Logger logger=Logger.getLogger(RedisListener.class);
 	
     /**
      *  取得订阅的消息后的处理    (non-Javadoc)

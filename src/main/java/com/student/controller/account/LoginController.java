@@ -10,7 +10,9 @@ import org.apache.commons.lang.StringUtils;
 import com.jfinal.aop.Duang;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.student.common.BaseController;
+import com.student.common.Constant;
 import com.student.constant.CommonConstant;
 import com.student.constant.CommonEnum.LogType;
 import com.student.dao.UserSession;
@@ -55,6 +57,7 @@ public class LoginController extends BaseController{
 		render(image);
 	}
 
+	@SuppressWarnings("unused")
 	public void login(){
 		String userName=getPara("username");
 		String password=getPara("password");
@@ -68,7 +71,11 @@ public class LoginController extends BaseController{
 			removeCookie(CommonConstant.COOKIE_USERNAME, "/");
 			removeCookie(CommonConstant.COOKIE_PASSWORD, "/");
 		}
-		SystemAdmin admin=SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
+		SystemAdmin admin1=CacheKit.get(Constant.ONE_MINUTE, "user");
+		SystemAdmin admin=SystemAdmin.dao.findFirstByCache(Constant.ONE_MINUTE,"user"," select * from system_admin where login_name=?",userName);
+		
+		//System.err.println(admin1);
+//		/SystemAdmin admin=SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
 		if(admin==null){
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;

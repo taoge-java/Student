@@ -16,7 +16,7 @@ create table system_admin(
    mail varchar(100) default null,
    last_login_time datetime default null,
    super_flag tinyint(1) default 1,
-   role_id int not null,
+   role_id int default 0,
    login_count int default 0,
    login_error int default 0,
    primary key(id)
