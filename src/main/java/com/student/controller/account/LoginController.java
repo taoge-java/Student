@@ -10,11 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import com.jfinal.aop.Duang;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
-import com.jfinal.plugin.ehcache.CacheKit;
-import com.jfinal.plugin.redis.Cache;
-import com.jfinal.plugin.redis.Redis;
 import com.student.common.BaseController;
-import com.student.common.Constant;
 import com.student.constant.CommonConstant;
 import com.student.constant.CommonEnum.LogType;
 import com.student.dao.UserSession;
@@ -59,7 +55,6 @@ public class LoginController extends BaseController{
 		render(image);
 	}
 
-	@SuppressWarnings("unused")
 	public void login(){
 		String userName=getPara("username");
 		String password=getPara("password");

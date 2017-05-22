@@ -1,5 +1,6 @@
 package com.student.config;
 
+import com.jfinal.aop.Duang;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -19,13 +20,15 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
 import com.student.interceptor.PermissionInterceptor;
 import com.student.interceptor.ViewContextInterceptor;
+import com.student.job.base.JobManger;
 import com.student.model.BaseModel;
+import com.student.spring.SpringBeanManger;
 
 
 @SuppressWarnings("unused")
 public class SysConfig extends JFinalConfig{
 
-	private Logger log=Logger.getLogger(SysConfig.class);
+	private Logger LOG=Logger.getLogger(SysConfig.class);
 	
 	public final static String BASE_VIEW="/WEB-INF/views";
 	
@@ -85,5 +88,17 @@ public class SysConfig extends JFinalConfig{
 	@Override
 	public void configHandler(Handlers handlers) {
 	   handlers.add(new ContextPathHandler("BASE_PATH"));
+	}
+	
+	@Override
+	public void afterJFinalStart() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				JobManger job=Duang.duang(JobManger.class);
+				job.start();
+			}
+		}).start();
+		LOG.info("数据初始化完毕");
 	}
 }
