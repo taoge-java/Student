@@ -10,7 +10,7 @@ public class OnlineClearJob extends BaseJob{
 	@Override
 	public void execute(JobExecutionContext context) 
 			throws JobExecutionException {
-		 System.out.println("hello");		
+		 
 	}
 
 }
