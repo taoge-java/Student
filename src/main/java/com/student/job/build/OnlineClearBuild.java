@@ -10,9 +10,9 @@ import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 
+import com.student.job.base.BaseJob;
 import com.student.job.base.JobBuild;
 import com.student.job.base.JobManger;
-import com.test.BaseJob;
 
 public class OnlineClearBuild implements JobBuild{
 
