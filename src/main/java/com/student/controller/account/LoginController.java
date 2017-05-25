@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
@@ -13,7 +14,6 @@ import com.student.common.BaseController;
 import com.student.constant.CommonConstant;
 import com.student.constant.CommonEnum.LogType;
 import com.student.dao.UserSession;
-import com.student.interceptor.Inject.BY_NAME;
 import com.student.model.system.SystemAdmin;
 import com.student.service.system.RoleService;
 import com.student.utils.DateUtil;
@@ -33,7 +33,7 @@ public class LoginController extends BaseController{
 	
 	private static final Logger LOG=Logger.getLogger(LoginController.class);
 	
-	@BY_NAME
+	@Autowired
 	private RoleService roleService;
 	
 	/**

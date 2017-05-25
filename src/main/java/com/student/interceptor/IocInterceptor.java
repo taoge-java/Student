@@ -2,6 +2,7 @@ package com.student.interceptor;
 
 import java.lang.reflect.Field;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.jfinal.aop.Interceptor;
@@ -22,6 +23,8 @@ public class IocInterceptor implements Interceptor{
 				bean = ctx.getBean(field.getName());
 			else if (field.isAnnotationPresent(Inject.BY_TYPE.class))
 				bean = ctx.getBean(field.getType());
+			else if(field.isAnnotationPresent(Autowired.class))
+				bean = ctx.getBean(field.getName());
 			else
 				continue ;
 			
