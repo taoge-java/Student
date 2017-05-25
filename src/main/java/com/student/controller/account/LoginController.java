@@ -7,15 +7,15 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.jfinal.aop.Duang;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
 import com.student.common.BaseController;
 import com.student.constant.CommonConstant;
 import com.student.constant.CommonEnum.LogType;
 import com.student.dao.UserSession;
+import com.student.interceptor.Inject.BY_NAME;
 import com.student.model.system.SystemAdmin;
-import com.student.service.system.RoleServices;
+import com.student.service.system.RoleService;
 import com.student.utils.DateUtil;
 import com.student.utils.ImageUtil;
 import com.student.utils.IpUtils;
@@ -33,11 +33,14 @@ public class LoginController extends BaseController{
 	
 	private static final Logger LOG=Logger.getLogger(LoginController.class);
 	
-	private RoleServices roleService=Duang.duang(RoleServices.class);
+	@BY_NAME
+	private RoleService roleService;
+	
 	/**
 	 * 用户登录页面
 	 */
 	public void index(){
+		roleService.findRoleById(1);
 		String userName=getCookie(CommonConstant.COOKIE_USERNAME);
 		String password=getCookie(CommonConstant.COOKIE_PASSWORD);
 		if(userName!=null&&password!=null){
@@ -68,18 +71,17 @@ public class LoginController extends BaseController{
 			removeCookie(CommonConstant.COOKIE_USERNAME, "/");
 			removeCookie(CommonConstant.COOKIE_PASSWORD, "/");
 		}
+		
 		//ehcache 缓存
 //		SystemAdmin admin1=CacheKit.get(Constant.ONE_MINUTE, "user");
 //		SystemAdmin admin=SystemAdmin.dao.findFirstByCache(Constant.ONE_MINUTE,"user"," select * from system_admin where login_name=?",userName);
 		
 		//System.err.println(admin1);
 		SystemAdmin admin=SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
-		//Cache cahe=Redis.use("student");
 		if(admin==null){
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
 		}
-		System.out.println(admin.getInt("login_error"));
 		if(admin.getInt("login_error")<=3&&StringUtils.isBlank(code)){
 			   loginSrvice(admin,password);
 		}else{

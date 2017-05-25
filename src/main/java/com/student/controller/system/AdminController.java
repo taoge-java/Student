@@ -14,7 +14,7 @@ import com.student.constant.CommonEnum.LogType;
 import com.student.constant.OperCode;
 import com.student.model.system.SystemAdmin;
 import com.student.model.system.SystemRole;
-import com.student.service.system.AdminServices;
+import com.student.service.system.AdminService;
 import com.student.utils.Result;
 import com.student.utils.ResultCode;
 
@@ -24,7 +24,7 @@ import com.student.utils.ResultCode;
 @ControllerBind(controllerKey="/system/admin")
 public class AdminController extends BaseController{
 	
-	private AdminServices adminServices=Duang.duang(AdminServices.class.getName(), AdminServices.class);
+	private AdminService adminServices=Duang.duang(AdminService.class.getName(), AdminService.class);
 	
 	private Logger log=Logger.getLogger(AdminController.class);
 	/**

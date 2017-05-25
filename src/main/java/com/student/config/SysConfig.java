@@ -18,11 +18,13 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.ViewType;
+import com.student.interceptor.IocInterceptor;
 import com.student.interceptor.PermissionInterceptor;
 import com.student.interceptor.ViewContextInterceptor;
 import com.student.job.base.JobManger;
 import com.student.model.BaseModel;
 import com.student.spring.SpringBeanManger;
+import com.student.spring.SpringPlugin;
 
 
 @SuppressWarnings("unused")
@@ -77,12 +79,14 @@ public class SysConfig extends JFinalConfig{
 	    redis.getJedisPoolConfig().setMaxTotal(200);
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
+	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
 	}
 
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new PermissionInterceptor());
 		interceptors.add(new ViewContextInterceptor());
+		interceptors.add(new IocInterceptor());
 	}
 
 	@Override

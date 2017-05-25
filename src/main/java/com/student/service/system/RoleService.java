@@ -11,6 +11,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
@@ -26,7 +27,8 @@ import com.student.utils.ResultCode;
  * @author zjt
  *
  */
-public class RoleServices {
+@Service
+public class RoleService {
 	
 	private Logger log=Logger.getLogger(AdminController.class);
 	

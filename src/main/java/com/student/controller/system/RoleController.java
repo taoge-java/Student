@@ -10,7 +10,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.student.common.BaseController;
 import com.student.constant.CommonEnum.LogType;
 import com.student.model.system.SystemRole;
-import com.student.service.system.RoleServices;
+import com.student.service.system.RoleService;
 import com.student.utils.Result;
 import com.student.utils.ResultCode;
 /**
@@ -23,7 +23,7 @@ public class RoleController extends BaseController{
 	
 	private Logger log=Logger.getLogger(AdminController.class);
 	
-	private RoleServices roleServices=Duang.duang(RoleServices.class.getName(), RoleServices.class);
+	private RoleService roleServices=Duang.duang(RoleService.class.getName(), RoleService.class);
 	
 	public void index(){
 		Integer pageNumber=getParaToInt("pageNumber", 1);

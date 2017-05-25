@@ -3,7 +3,9 @@ package com.student.service.system;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
@@ -12,9 +14,13 @@ import com.student.model.system.SystemAdmin;
 import com.student.utils.Md5Utils;
 import com.student.utils.Result;
 import com.student.utils.ResultCode;
-
-public class AdminServices {
-	Logger log=Logger.getLogger(AdminServices.class);
+@Service
+public class AdminService {
+	
+	
+	Logger log=Logger.getLogger(AdminService.class);
+	
+	
 	/**
 	 * 管理员列表
 	 */
