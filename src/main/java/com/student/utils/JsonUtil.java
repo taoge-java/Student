@@ -19,7 +19,7 @@ public class JsonUtil {
 	 */
 	public static String toJson(Map<String,String> map){
 		if(null==map)
-			throw new NullPointerException("map is null");
+			throw new NullPointerException("map can not be null");
 		Set<String> keySet=map.keySet();
 		String lastKey=getSetLastKey(keySet.iterator());
 		StringBuilder sb=new StringBuilder("{");
