@@ -15,7 +15,12 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.IDataSourceProvider;
 import com.jfinal.plugin.activerecord.Model;
-
+/**
+ * 表自动扫描
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年5月25日 上午9:23:44
+ */
 public class AutoTableBindPlugin extends ActiveRecordPlugin{
 
 	protected final Logger log = Logger.getLogger(getClass());
